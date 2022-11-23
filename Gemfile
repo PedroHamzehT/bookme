@@ -67,6 +67,7 @@ group :development do
 
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'letter_opener'
 end
 
 group :test do
@@ -75,3 +76,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem 'devise', '~> 4.8', '>= 4.8.1'
