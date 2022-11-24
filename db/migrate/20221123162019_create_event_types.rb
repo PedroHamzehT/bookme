@@ -5,8 +5,9 @@ class CreateEventTypes < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.datetime :start_available_period, null: false
       t.datetime :end_available_period, null: false
-      t.integer :each_event_duration, null: false
-      t.integer :break_time_amount
+      t.integer :duration, null: false
+      t.integer :before_break_time, default: 0
+      t.integer :after_break_time, default: 0
 
       t.timestamps
     end

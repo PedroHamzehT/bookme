@@ -19,21 +19,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_153410) do
     t.string "name", null: false
     t.datetime "start_available_period", null: false
     t.datetime "end_available_period", null: false
-    t.integer "each_event_duration", null: false
-    t.integer "break_time_amount"
+    t.integer "duration", null: false
+    t.integer "before_break_time", default: 0
+    t.integer "after_break_time", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug", null: false
+    t.index ["slug"], name: "index_event_types_on_slug"
     t.index ["user_id"], name: "index_event_types_on_user_id"
   end
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.datetime "scheduled_at"
-    t.integer "duration"
-    t.string "guest_first_name"
-    t.string "guest_last_name"
-    t.string "guest_email"
+    t.datetime "scheduled_at", null: false
+    t.integer "duration", null: false
+    t.string "guest_name", null: false
+    t.string "guest_email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_schedules_on_user_id"
@@ -60,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_153410) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username"
   end
 
   add_foreign_key "event_types", "users"
