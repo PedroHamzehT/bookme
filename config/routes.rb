@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   get '/me', to: 'users#me', as: 'me'
+
+  resources :event_types
 end
