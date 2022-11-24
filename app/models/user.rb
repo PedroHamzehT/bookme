@@ -8,4 +8,5 @@ class User < ApplicationRecord
          :confirmable, :trackable
 
   has_many :event_types, dependent: :destroy
+  has_many :schedules, dependent: :destroy
 end
