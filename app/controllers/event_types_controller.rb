@@ -12,7 +12,6 @@ class EventTypesController < ApplicationController
   end
 
   def create
-    debugger
     @event_type = current_user.event_types.new(event_type_params)
     @event_type.start_available_period = @event_type.start_available_period.change(year: 1000, month: 01, day: 01)
     @event_type.end_available_period = @event_type.end_available_period.change(year: 1000, month: 01, day: 01)
