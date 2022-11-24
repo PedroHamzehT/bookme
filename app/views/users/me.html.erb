@@ -6,7 +6,7 @@
 
 <% @event_types.each do |event_type| %>
   <div class="user-event-type">
-    <p><%= event_type.name %></p>
+    <p><%= event_type.name %> | <%= event_type.slug %></p>
     <p><%= event_type.start_available_period %></p>
     <p><%= event_type.end_available_period %></p>
     <p><%= event_type.each_event_duration %></p>
