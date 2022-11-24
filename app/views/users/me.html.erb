@@ -2,6 +2,8 @@
 
 <h3>Here are the list of your event types:</h3>
 
+<%= link_to "Create new event type", new_event_type_url %>
+
 <% @event_types.each do |event_type| %>
   <div class="user-event-type">
     <p><%= event_type.name %></p>

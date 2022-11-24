@@ -1,0 +1,28 @@
+<%= form_with model: @event_type do |form| %>
+  <div class="form-field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :start_available_period %>
+    <%= form.time_select :start_available_period %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :end_available_period %>
+    <%= form.time_select :end_available_period %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :each_event_duration %>
+    <%= form.number_field :each_event_duration, placeholder: 'Ex:30 min' %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :break_time_amount %>
+    <%= form.number_field :break_time_amount, placeholder: 'Ex: 30 min' %>
+  </div>
+
+  <%= form.submit 'Create' %>
+<% end %>
