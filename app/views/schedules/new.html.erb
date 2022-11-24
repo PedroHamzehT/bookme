@@ -1,0 +1,9 @@
+<h1>New schedule</h1>
+
+<%= render "form", locals: { schedule: @schedule, url: new_schedule_url } %>
+
+<br>
+
+<div>
+  <%= link_to "Back to schedules", schedules_path %>
+</div>

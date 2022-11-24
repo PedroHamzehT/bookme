@@ -1,0 +1,27 @@
+<%= form_with(model: locals[:schedule], url: locals[:url]) do |form| %>
+  <% @available_schedules.each do |available_schedule| %>
+    <div class="available-schedule">
+      <%= form.radio_button :scheduled_at, available_schedule %>
+      <%= form.label :scheduled_at, available_schedule %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :guest_first_name, style: "display: block" %>
+    <%= form.text_field :guest_first_name %>
+  </div>
+
+  <div>
+    <%= form.label :guest_last_name, style: "display: block" %>
+    <%= form.text_field :guest_last_name %>
+  </div>
+
+  <div>
+    <%= form.label :guest_email, style: "display: block" %>
+    <%= form.text_field :guest_email %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
