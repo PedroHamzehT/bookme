@@ -12,8 +12,8 @@ class SchedulesController < ApplicationController
     user = User.includes(:event_types).find_by(username: params[:username])
     event_type = user.event_types.find_by(slug: params[:event_type])
 
-    @available_schedules = ::Schedules::AvailableUserSchedules.call(user: user, event_type: event_type)
-    @schedule = user.schedules.new(duration: event_type.each_event_duration)
+    @available_schedules = ::Schedules::AvailableUserSchedules.call(user:, event_type:)
+    @schedule = user.schedules.new(duration: event_type.duration)
   end
 
   def edit
@@ -23,13 +23,13 @@ class SchedulesController < ApplicationController
     user = User.find_by(username: params[:username])
     event_type = EventType.find_by(slug: params[:event_type])
 
-    @schedule = user.schedules.new(schedule_params.merge(duration: event_type.each_event_duration))
+    @schedule = user.schedules.new(schedule_params.merge(duration: event_type.duration))
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to schedule_url(@schedule), notice: "Schedule was successfully created." }
+        format.html { redirect_to schedule_url(@schedule), notice: 'Schedule was successfully created.' }
         format.json { render :show, status: :created, location: @schedule }
       else
-        @available_schedules = ::Schedules::AvailableUserSchedules.call(user: user, event_type: event_type)
+        @available_schedules = ::Schedules::AvailableUserSchedules.call(user:, event_type:)
 
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to schedule_url(@schedule), notice: "Schedule was successfully updated." }
+        format.html { redirect_to schedule_url(@schedule), notice: 'Schedule was successfully updated.' }
         format.json { render :show, status: :ok, location: @schedule }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +65,6 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_params
-    params.require(:schedule).permit(:scheduled_at, :duration, :guest_first_name, :guest_last_name, :guest_email)
+    params.require(:schedule).permit(:scheduled_at, :duration, :guest_name, :guest_email)
   end
 end
