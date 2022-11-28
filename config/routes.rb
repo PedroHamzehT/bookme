@@ -7,9 +7,17 @@ Rails.application.routes.draw do
 
   resources :event_types
 
-  resources :schedules, except: %i[ new create ]
+  scope '/schedules/:id' do
+    get   '/', to: 'schedules#show',   as: 'schedule'
+    put   '/', to: 'schedules#update'
+    patch '/', to: 'schedules#update'
+
+    get '/reschedule', to: 'schedules#edit',    as: 'edit_schedule'
+    get '/cancel',     to: 'schedules#destroy', as: 'destroy_schedule'
+  end
+
   scope '/:username/:event_type' do
-    get '/', to: 'schedules#new', as: 'new_schedule'
+    get '/',  to: 'schedules#new',    as: 'new_schedule'
     post '/', to: 'schedules#create'
   end
 end
