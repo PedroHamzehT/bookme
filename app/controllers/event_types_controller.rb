@@ -30,8 +30,9 @@ class EventTypesController < ApplicationController
       :name,
       :start_available_period,
       :end_available_period,
-      :each_event_duration,
-      :break_time_amount
+      :duration,
+      :before_break_time,
+      :after_break_time
     )
   end
 end

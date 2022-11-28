@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :event_type do
     association :user
 
     name                   { 'Test Event Type' }
-    start_available_period { Time.new(2022, 01, 01, 06, 00, 00, 00).utc }
-    end_available_period   { Time.new(2022, 01, 01, 18, 00, 00, 00).utc }
-    each_event_duration    { 30 }
-    break_time_amount      { 15 }
+    start_available_period { Time.new(2022, 1, 1, 6, 0, 0, 0).utc }
+    end_available_period   { Time.new(2022, 1, 1, 18, 0, 0, 0).utc }
+    duration               { 30 }
+    before_break_time      { 15 }
+    after_break_time       { 15 }
   end
 end
