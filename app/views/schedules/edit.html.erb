@@ -8,4 +8,5 @@
 
 <div>
   <%= link_to "Show this schedule", @schedule %> |
+  <%= link_to "Cancel this schedule", schedule_url(@schedule), data: { turbo_method: :delete, confirm: 'Are you sure you want to cancel?' } %>
 </div>

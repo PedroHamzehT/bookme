@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   resources :event_types
 
   scope '/schedules/:id' do
-    get   '/', to: 'schedules#show',   as: 'schedule'
-    put   '/', to: 'schedules#update'
-    patch '/', to: 'schedules#update'
+    get   '/',  to: 'schedules#show',   as: 'schedule'
+    put   '/',  to: 'schedules#update'
+    patch '/',  to: 'schedules#update'
+    delete '/', to: 'schedules#destroy'
 
     get '/reschedule', to: 'schedules#edit',    as: 'edit_schedule'
-    get '/cancel',     to: 'schedules#destroy', as: 'destroy_schedule'
   end
 
   scope '/:username/:event_type' do
