@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SchedulesController < ApplicationController
-  before_action :set_schedule, only: %i[ show edit update destroy ]
+  before_action :set_schedule, only: %i[show edit update destroy]
 
   def index
     @schedules = Schedule.all
@@ -13,17 +15,21 @@ class SchedulesController < ApplicationController
     event_type = user.event_types.find_by(slug: params[:event_type])
 
     @available_schedules = ::Schedules::AvailableUserSchedules.call(user:, event_type:)
-    @schedule = user.schedules.new(duration: event_type.duration)
+    @schedule = user.schedules.new(event_type:)
   end
 
   def edit
+    @available_schedules = ::Schedules::AvailableUserSchedules.call(
+      user: @schedule.user,
+      event_type: @schedule.event_type
+    )
   end
 
   def create
     user = User.find_by(username: params[:username])
     event_type = EventType.find_by(slug: params[:event_type])
 
-    @schedule = user.schedules.new(schedule_params.merge(duration: event_type.duration))
+    @schedule = user.schedules.new(schedule_params.merge(event_type:))
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to schedule_url(@schedule), notice: 'Schedule was successfully created.' }
